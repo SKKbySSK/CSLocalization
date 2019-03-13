@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization.Common", "Localization.Common\Localization.Common.csproj", "{5B7F2DFF-01F2-47B6-B427-E8585F70C688}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSLocalization.Mac", "CSLocalization.Mac\CSLocalization.Mac.csproj", "{F65A647C-EC4E-4CB2-8739-FB85B5C49772}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSLocalization.Test", "CSLocalization.Test\CSLocalization.Test.csproj", "{17A34512-BA8F-4E81-AFE0-D722DF380FC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B7F2DFF-01F2-47B6-B427-E8585F70C688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B7F2DFF-01F2-47B6-B427-E8585F70C688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B7F2DFF-01F2-47B6-B427-E8585F70C688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B7F2DFF-01F2-47B6-B427-E8585F70C688}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F65A647C-EC4E-4CB2-8739-FB85B5C49772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F65A647C-EC4E-4CB2-8739-FB85B5C49772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F65A647C-EC4E-4CB2-8739-FB85B5C49772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F65A647C-EC4E-4CB2-8739-FB85B5C49772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17A34512-BA8F-4E81-AFE0-D722DF380FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17A34512-BA8F-4E81-AFE0-D722DF380FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17A34512-BA8F-4E81-AFE0-D722DF380FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17A34512-BA8F-4E81-AFE0-D722DF380FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
