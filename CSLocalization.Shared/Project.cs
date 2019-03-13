@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,10 @@ namespace CSLocalization.Shared
         public GeneratorConfig GeneratorConfig { get; set; } = new GeneratorConfig();
 
         public LocalizationDictionary Localization { get; set; } = new LocalizationDictionary();
+
+        public ObservableCollection<int> LCIDs { get; set; } = new ObservableCollection<int>();
+
+        public ObservableCollection<string> Keys { get; set; } = new ObservableCollection<string>();
 
         [JsonIgnore()]
         public string Path { get; internal set; }

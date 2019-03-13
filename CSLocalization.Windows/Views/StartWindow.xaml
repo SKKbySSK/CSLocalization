@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:CSLocalization.Windows.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="StartWindow" Height="450" Width="800">
+        Title="CSLocalization" Height="450" Width="800">
     <Window.DataContext>
         <vm:StartViewModel/>
     </Window.DataContext>
