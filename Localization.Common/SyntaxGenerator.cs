@@ -9,24 +9,23 @@ namespace Localization.Common
 {
     public class SyntaxGenerator
     {
-        public string ClassName { get; set; } = "Localization";
+        public SyntaxGenerator(GeneratorConfig config)
+        {
+            Config = config;
+        }
 
-        public bool ImplementPropertyChanged { get; set; } = true;
+        public SyntaxGenerator() : this(new GeneratorConfig()) { }
 
-        public bool ImplementPropertyChanging { get; set; } = true;
-
-        public string Namespace { get; set; } = "App";
-
-        public Modifiers Modifiers { get; set; } = Modifiers.Public;
+        public GeneratorConfig Config { get; }
 
         public string Generate(LocalizationDictionary localization)
         {
             var cs = new ClassDeclarationSyntax();
-            cs.Identifier = ClassName;
-            cs.Modifiers = Modifiers;
+            cs.Identifier = Config.ClassName;
+            cs.Modifiers = Config.Modifiers;
             cs.BaseList = new BaseListSyntax();
 
-            var ns = Syntax.NamespaceDeclaration(Namespace);
+            var ns = Syntax.NamespaceDeclaration(Config.Namespace);
             ns.Members.Add(cs);
 
             List<UsingDirectiveSyntax> usings = new List<UsingDirectiveSyntax>();
@@ -44,12 +43,12 @@ namespace Localization.Common
             using (var sw = new StringWriter())
             using (var printer = new CSharpSyntax.Printer.SyntaxPrinter(new CSharpSyntax.Printer.SyntaxWriter(sw)))
             {
-                if (ImplementPropertyChanging)
+                if (Config.ImplementPropertyChanging)
                 {
                     ResolvePropertyChanging(cs);
                 }
 
-                if (ImplementPropertyChanged)
+                if (Config.ImplementPropertyChanged)
                 {
                     ResolvePropertyChanged(cs);
                 }
@@ -67,9 +66,9 @@ namespace Localization.Common
 
         private void CreateConstructor(ClassDeclarationSyntax cs)
         {
-            var currentc = Syntax.ObjectCreationExpression(ClassName, new ArgumentListSyntax());
+            var currentc = Syntax.ObjectCreationExpression(Config.ClassName, new ArgumentListSyntax());
             var current = Syntax.BinaryExpression(BinaryOperator.Equals, Syntax.ParseName("Current"), currentc);
-            var constructor = Syntax.ConstructorDeclaration(ClassName, Syntax.ParameterList(),
+            var constructor = Syntax.ConstructorDeclaration(Config.ClassName, Syntax.ParameterList(),
                 Syntax.Block(
                     Syntax.ExpressionStatement(current)
                 ));
@@ -146,7 +145,7 @@ namespace Localization.Common
             syntaxes.Add(Syntax.UsingDirective("System"));
             syntaxes.Add(Syntax.UsingDirective("System.Globalization"));
 
-            if (ImplementPropertyChanged || ImplementPropertyChanging)
+            if (Config.ImplementPropertyChanged || Config.ImplementPropertyChanging)
             {
                 syntaxes.Add(Syntax.UsingDirective("System.ComponentModel"));
             }
@@ -174,7 +173,7 @@ namespace Localization.Common
 
         private PropertyDeclarationSyntax CreateCurrentProperty()
         {
-            var prop = Syntax.PropertyDeclaration(null, Modifiers.Public | Modifiers.Static, ClassName, null, "Current");
+            var prop = Syntax.PropertyDeclaration(null, Modifiers.Public | Modifiers.Static, Config.ClassName, null, "Current");
             prop.AccessorList = Syntax.AccessorList(Syntax.AccessorDeclaration(AccessorDeclarationKind.Get, null));
 
             return prop;
@@ -189,26 +188,26 @@ namespace Localization.Common
             List<StatementSyntax> statements = new List<StatementSyntax>();
             statements.Add(Syntax.IfStatement(condition, Syntax.ReturnStatement()));
 
-            if (ImplementPropertyChanging)
+            if (Config.ImplementPropertyChanging)
             {
                 statements.Add(Syntax.ExpressionStatement(CreateChangingMethodInvocator("Culture")));
             }
 
             statements.Add(Syntax.ExpressionStatement(Syntax.BinaryExpression(BinaryOperator.Equals, Syntax.ParseName("culture"), Syntax.ParseName("value"))));
 
-            if (ImplementPropertyChanged)
+            if (Config.ImplementPropertyChanged)
             {
                 statements.Add(Syntax.ExpressionStatement(CreateChangedMethodInvocator("Culture")));
             }
 
             foreach (var loc in localization)
             {
-                if (ImplementPropertyChanging)
+                if (Config.ImplementPropertyChanging)
                 {
                     statements.Add(Syntax.ExpressionStatement(CreateChangingMethodInvocator(loc.Key)));
                 }
 
-                if (ImplementPropertyChanged)
+                if (Config.ImplementPropertyChanged)
                 {
                     statements.Add(Syntax.ExpressionStatement(CreateChangedMethodInvocator(loc.Key)));
                 }
