@@ -40,11 +40,14 @@ namespace CSLocalization.Windows.ViewModels
 
         public ReactiveProperty<Project> Selected { get; } = new ReactiveProperty<Project>();
 
+        public ReactiveCommand CloseCommand { get; } = new ReactiveCommand();
+
         public void OpenSelectedProject()
         {
             if (Selected.Value != null)
             {
-
+                new Views.EditorWindow(Selected.Value).Show();
+                CloseCommand.Execute();
             }
         }
     }

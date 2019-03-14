@@ -22,6 +22,7 @@ namespace CSLocalization.Windows.Views
         public StartWindow()
         {
             InitializeComponent();
+            VM.CloseCommand.Subscribe(() => Close());
         }
 
         private ViewModels.StartViewModel VM => (ViewModels.StartViewModel)DataContext;

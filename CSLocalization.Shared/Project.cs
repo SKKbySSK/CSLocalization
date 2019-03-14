@@ -18,10 +18,6 @@ namespace CSLocalization.Shared
 
         public LocalizationDictionary Localization { get; set; } = new LocalizationDictionary();
 
-        public ObservableCollection<int> LCIDs { get; set; } = new ObservableCollection<int>();
-
-        public ObservableCollection<string> Keys { get; set; } = new ObservableCollection<string>();
-
         [JsonIgnore()]
         public string Path { get; internal set; }
 
@@ -33,7 +29,7 @@ namespace CSLocalization.Shared
             Directory.CreateDirectory(Manager.RootDirectory);
             using (var sw = File.CreateText(Path))
             {
-                sw.Write(JsonConvert.SerializeObject(this));
+                sw.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
             }
         }
     }

@@ -39,7 +39,7 @@ namespace CSLocalization.Shared
             var project = new Project();
             project.Manager = this;
             project.Title = title;
-            project.Path = Path.Combine(RootDirectory, Guid.NewGuid() + ".json");
+            project.Path = Path.Combine(RootDirectory, title + ".json");
             project.Export();
 
             projects.Add(project);

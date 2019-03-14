@@ -6,9 +6,9 @@
         {
         }
 
-        public Text(int lCID, string value)
+        public Text(int LCID, string value)
         {
-            LCID = lCID;
+            this.LCID = LCID;
             Value = value;
         }
 

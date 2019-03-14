@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace Localization.Common
 {
-    public class LocalizedText : List<Text>
+    public class LocalizedText : ObservableCollection<Text>
     {
         public Text GetText(CultureInfo culture)
         {
@@ -19,6 +19,17 @@ namespace Localization.Common
             }
 
             return null;
+        }
+
+        public bool ContainsLCID(int LCID)
+        {
+            foreach (var t in this)
+            {
+                if (t.LCID == LCID)
+                    return true;
+            }
+
+            return false;
         }
     }
 }
